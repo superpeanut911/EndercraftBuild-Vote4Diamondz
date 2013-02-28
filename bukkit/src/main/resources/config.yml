@@ -1,0 +1,31 @@
+# In voting-reward-actions you may use the following format characters/strings:
+#
+# (case matters for the following options)
+# Use PLAYER to indicate the player name in the action.
+#
+# Use % as the first character to indicate something the player should say in chat.
+# Use @ as the first character to indicate commands that should be run as the player.
+# Use ^ as the first character to indicate something that should be run as the server.
+# Use $ as the first character to indicate a message the server should send the player.
+# Use ! as the first character to indicate a message the server should broadcast to all players.
+#
+# Be sure to enclose all actions in "" to ensure proper parsing.
+
+
+# List of actions to take to reward the player for voting.
+voting-reward-actions:
+  - "^eco give PLAYER 500"
+  - "!&c&lPLAYER&6 is awesome and voted for us today!"
+
+
+# Permission to check for to determine if a player should be nagged to vote or not.
+voter-permission: ecb.voted
+
+
+# Time, in seconds, between nag messages.
+nag-interval: 600
+
+
+# List of actions to take during each nag interval.
+nag-actions:
+  - "$&6Hey &c&lPLAYER&6!  I see you have not voted today!  Help us out and vote at &c&lendercraftbuild.net/vote4diamondz&6!"

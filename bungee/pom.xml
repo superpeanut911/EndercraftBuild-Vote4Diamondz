@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>net.endercraftbuild</groupId>
+	<artifactId>ecb-v4d-parent</artifactId>
+	<version>dev-SNAPSHOT</version>
+	<relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>net.endercraftbuild</groupId>
+    <artifactId>ecb-v4d-bungee</artifactId>
+    <version>dev-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>ECB Vote4Diamondz Bungee</name>
+    <description>ECB BungeeCord Vote4Diamondz Plugin</description>
+    
+    <repositories>
+        <repository>
+            <id>bungee-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+       <repository>
+           <id>repo2_maven_org</id>
+           <url>http://repo2.maven.org/maven2</url>
+       </repository>
+        <repository>
+			<id>spout-nexus</id>
+			<name>Nexus.Spout</name>
+			<url>http://nexus.spout.org/content/repositories/third-party-snapshots</url>
+        </repository>
+    </repositories>
+    
+    <properties>
+    	<jettyVersion>7.6.9.v20130131</jettyVersion>
+  	</properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-proxy</artifactId>
+            <version>1.4.7-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+         <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alta189</groupId>
+            <artifactId>simplesave</artifactId>
+            <version>1.2.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>${project.basedir}/src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Main-Class>net.endercraftbuild.bungee.Vote4Diamondz</Main-Class>
+                            <Implementation-Version>${describe}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                        	<artifactSet>
+                        		<excludes>
+                        			<exclude>net.md-5:bungeecord-proxy</exclude>
+                        			<exclude>net.md-5:bungeecord-protocol</exclude>
+                        			<exclude>net.md-5:bungeecord-api</exclude>
+                        			<exclude>com.google.guava:guava</exclude>
+                        			<exclude>org.yaml:snakeyaml</exclude>
+                        		</excludes>
+                        	</artifactSet>
+                            <filters>
+				                <filter>
+				                    <artifact>*:*</artifact>
+				                    <excludes>
+				                        <exclude>META-INF/*.SF</exclude>
+				                        <exclude>META-INF/*.DSA</exclude>
+				                        <exclude>META-INF/*.RSA</exclude>
+				                    </excludes>
+				                </filter>
+                			</filters>
+                            <minimizeJar>true</minimizeJar>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.endercraftbuild</groupId>
+    <artifactId>ecb-v4d-parent</artifactId>
+    <version>dev-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>ECB Vote4Diamondz</name>
+    <description>Parent project for all ECB Vote4Diamondz modules.</description>
+    <url>https://github.com/mortu/EndercraftBuild-Vote4Diamondz</url>
+    <inceptionYear>2013</inceptionYear>
+
+    <modules>
+        <module>bukkit</module>
+        <module>bungee</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <build.number>unknown</build.number>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Vote4Diamondz</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Vote for your favourite Minecraft server here!">
+        <meta name="author" content="md_5">
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        <style>
+            body {
+                padding-top: 20px;
+                text-align: center;
+            }
+            img {
+                border-radius: 10px;
+                -moz-border-radius: 10px;
+                -webkit-border-radius: 10px;
+                cursor: pointer;
+                padding: 5px 0px 5px 0px;
+            }
+            .alert {
+                display: none;
+            }
+            ol {
+                margin: auto;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row span12">
+                <div class="well">
+                    <h1>Vote Here!</h1>
+                    <p>Use this panel to vote for this server on several voting sites.<br>Then press Submit to claim your reward!</p>
+                </div>
+                <hr>
+                <div class="alert"></div>
+                <form>
+                    <label>Enter your Minecraft IGN</label>
+                    <input type="text" placeholder="Minecraft IGN" id="username">
+                    <span class="help-block">Name is case sensitive.</span>
+                    <label>Click on each of the banners below to vote.</label>
+                    <!-- Begin sites -->
+                    <!-- End sites -->
+                    <button type="submit" class="btn">Submit</button>
+                </form>
+                <hr>
+                <div class="row span6 offset3">
+                    <div class="well well-small">
+                        <h2>Top Voters</h2>
+                        <ol id="top-voters"></ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            var alert = $(".alert");
+            var sites = {};
+            $(function(){
+                var top = $("#top-voters");
+                $.get("/top/", function(r) {
+                    top.html(r);
+                });
+            });
+            $("img").click(function() {
+                var site = $(this).attr("data-site");
+                sites[site] = true;
+                window.open(site, "_blank");
+            });
+            $("form").submit(function(e) {
+                var valid = true;
+                e.preventDefault();
+                $("img").each(function() {
+                    if (sites[$(this).attr("data-site")] == null) {
+                        alert.html("You have not voted on all sites");
+                        alert.slideDown();
+                        valid = false;
+                    }
+                });
+                if (valid) {
+                    alert.html("Processing your votes");
+                    alert.slideDown();
+                    $.get("/vote/" + $("#username").val(), function(r) {
+                        alert.html(r);
+                        alert.slideDown();
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
