@@ -20,15 +20,36 @@ public class Vote4Diamondz extends JavaPlugin {
 		if (!new File(this.getDataFolder().getPath() + File.separatorChar + "config.yml").exists())
 			saveDefaultConfig();
 		
-		voterNagTask = new VoterNagTask(this);
-		voteMessageListener = new VoteMessageListener(this);
-		Bukkit.getMessenger().registerIncomingPluginChannel(this, CHANNEL, voteMessageListener);
+		startTasks();
+		registerEvents();
 	}
 	
 	@Override
 	public void onDisable() {
+		unregisterEvents();
+		stopTasks();
+	}
+	
+	private void registerEvents() {
+		Bukkit.getMessenger().registerIncomingPluginChannel(this, CHANNEL, voteMessageListener = new VoteMessageListener(this));
+	}
+	
+	private void unregisterEvents() {
 		Bukkit.getMessenger().unregisterIncomingPluginChannel(this, CHANNEL, voteMessageListener);
 		voteMessageListener = null;
+	}
+	
+	public void reload() {
+		stopTasks();
+		reloadConfig();
+		startTasks();
+	}
+
+	private void startTasks() {
+		voterNagTask = new VoterNagTask(this);
+	}
+
+	private void stopTasks() {
 		voterNagTask.stopTask();
 		voterNagTask = null;
 	}

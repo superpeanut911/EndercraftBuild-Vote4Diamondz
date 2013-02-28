@@ -35,4 +35,19 @@
             </plugin>
         </plugins>
     </build>
+    <organization>
+    	<name>EndercraftBuild</name>
+    	<url>http://endercraftbuild.net</url>
+    </organization>
+    <scm>
+    	<url>https://github.com/superpeanut911/EndercraftBuild-Bungee</url>
+    </scm>
+    <issueManagement>
+    	<system>GitHub</system>
+    	<url>https://github.com/superpeanut911/EndercraftBuild-Bungee/issues</url>
+    </issueManagement>
+    <ciManagement>
+    	<system>jenkins</system>
+    	<url>http://ci.mortu.net/job/ECBBungee/</url>
+    </ciManagement>
 </project>

@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 import org.eclipse.jetty.server.Server;
 
+import net.endercraftbuild.bungee.commands.ReloadCommand;
 import net.endercraftbuild.bungee.database.*;
 import net.endercraftbuild.bungee.handlers.VoteHandler;
 
@@ -25,7 +26,6 @@ import com.alta189.simplesave.mysql.MySQLConfiguration;
 
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
-import net.md_5.bungee.api.ChatColor;
 
 public class Vote4Diamondz extends Plugin {
 	public final static String CHANNEL = "ecb-v4d";
@@ -37,31 +37,31 @@ public class Vote4Diamondz extends Plugin {
         return (int) (System.currentTimeMillis() / 1000L);
     }
     
+    private ReloadCommand reloadCommand; 
+    
 	private Properties properties;
 	private Server webServer;
     private Database database;
     
-    private String nagMessage;
-    private String broadcastMessage;
     private byte[] voterHtml;
     private Map<String, String> sites;
     	
 	@Override
 	public void onEnable() {
-		ProxyServer.getInstance().registerChannel(CHANNEL);
-		
 		copyResource(CONFIG_FILE);
 		copyResource(VOTER_HTML_FILE);
 		copyResource(SITES_FILE);
 		
+		ProxyServer.getInstance().getPluginManager().registerCommand(reloadCommand = new ReloadCommand(this));
+		ProxyServer.getInstance().registerChannel(CHANNEL);
 		startWebServer();
 	}
 	
 	@Override
 	public void onDisable() {
 		stopWebServer();
-		
 		ProxyServer.getInstance().unregisterChannel(CHANNEL);
+		ProxyServer.getInstance().getPluginManager().unregisterCommand(reloadCommand);
 	}
 	
 	public void copyResource(String name) {
@@ -112,8 +112,6 @@ public class Vote4Diamondz extends Plugin {
 		stopWebServer();
 		
 		properties = null;
-		nagMessage = null;
-		broadcastMessage = null;
 		voterHtml = null;
 		sites = null;
 		
@@ -204,24 +202,6 @@ public class Vote4Diamondz extends Plugin {
     
     public byte[] getThanksMessage() {
     	return getProperties().getProperty("thanks").getBytes();
-    }
-    
-    public String getNagMessage() {
-    	if (nagMessage != null)
-    		return nagMessage;
-    	
-    	nagMessage = ChatColor.translateAlternateColorCodes('&', getProperties().getProperty("nag"));
-    	
-    	return nagMessage;
-    }
-    
-    public String getBroadcastMessage() {
-    	if (broadcastMessage != null)
-    		return broadcastMessage;
-    	
-    	broadcastMessage = ChatColor.translateAlternateColorCodes('&', getProperties().getProperty("broadcastMessage"));
-    	
-    	return broadcastMessage;
     }
     
     public byte[] getVoterHtml() {

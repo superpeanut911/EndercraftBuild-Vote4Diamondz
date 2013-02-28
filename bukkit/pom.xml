@@ -9,9 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>net.endercraftbuild</groupId>
     <artifactId>ecb-v4d-bukkit</artifactId>
-    <version>dev-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>ECB Vote4Diamondz Bukkit</name>

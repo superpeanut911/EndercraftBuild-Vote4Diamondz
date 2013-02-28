@@ -2,3 +2,12 @@ name: ECB Bukkit Vote4Diamondz
 main: net.endercraftbuild.bukkit.Vote4Diamondz
 version: 1.0
 author: MortuTBK
+commands:
+  vreload:
+    description: Reloads the ECB Bukkit Vote4Diamondz configuration.
+    usage: /<command> - reloads the ECB Bukkit Vote4Diamondz configuration
+    permissions: ecb.v4d.reload
+    permission-message: You do not have permission to use that command.
+permissions:
+  ecb.v4d.reload:
+    description: Allows you to reload the ECB Bukkit Vote4Diamondz configuration.
