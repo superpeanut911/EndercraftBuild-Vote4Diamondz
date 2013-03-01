@@ -4,13 +4,15 @@
         <meta charset="utf-8">
         <title>Vote4Diamondz</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Vote for your favourite Minecraft server here!">
+        <meta name="description" content="Vote for EndercraftBuild here!">
         <meta name="author" content="md_5">
         <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
         <style>
             body {
                 padding-top: 20px;
                 text-align: center;
+                background-color: black;
+                color: rgb(179, 235, 76);
             }
             img {
                 border-radius: 10px;
@@ -25,34 +27,53 @@
             ol {
                 margin: auto;
             }
+            .well {
+                background-color: rgb(47, 65, 12);
+                border-color: rgb(97, 136, 26);
+            }
+            .help-block {
+                color: rgb(222, 255, 33);
+                font-size: 0.9em;
+            }
+            .btn {
+            	height: 32px;
+            	background: rgb(47, 65, 12);
+            	border: 1px solid rgb(97, 136, 26);
+            	color: rgb(179, 235, 76);
+            	font-weight: bold;
+            }
         </style>
     </head>
 
     <body>
-        <div class="container">
-            <div class="row span12">
-                <div class="well">
-                    <h1>Vote Here!</h1>
-                    <p>Use this panel to vote for this server on several voting sites.<br>Then press Submit to claim your reward!</p>
-                </div>
-                <hr>
-                <div class="alert"></div>
-                <form>
-                    <label>Enter your Minecraft IGN</label>
-                    <input type="text" placeholder="Minecraft IGN" id="username">
-                    <span class="help-block">Name is case sensitive.</span>
-                    <label>Click on each of the banners below to vote.</label>
-                    <!-- Begin sites -->
-                    <!-- End sites -->
-                    <button type="submit" class="btn">Submit</button>
-                </form>
-                <hr>
-                <div class="row span6 offset3">
-                    <div class="well well-small">
-                        <h2>Top Voters</h2>
-                        <ol id="top-voters"></ol>
-                    </div>
-                </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+            	<div class="span12">
+	                <div class="well">
+	                    <h1>Vote Here!</h1>
+	                    <p>Use this panel to vote for this server on several voting sites.<br>Then press <b>Claim Reward</b> to claim your reward!</p>
+	                </div>
+	                <hr>
+	                <div class="alert"></div>
+	                <form>
+	                    <label>Enter your Minecraft IGN</label>
+	                    <input type="text" placeholder="Minecraft IGN" id="username">
+	                    <span class="help-block">Name is case sensitive.</span>
+	                    <label>Click on each of the banners below to vote.</label>
+	                    <!-- Begin sites -->
+	                    <!-- End sites -->
+	                    <button type="submit" class="btn">Claim Reward!</button>
+	                </form>
+	                <hr>
+	            </div>
+	            <div class="row-fluid">
+	                <div class="span6 offset3">
+	                    <div class="well well-small">
+	                        <h2>Top Voters</h2>
+	                        <ol id="top-voters"></ol>
+	                    </div>
+	                </div>
+	            </div>
             </div>
         </div>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>

@@ -12,6 +12,8 @@ import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Level;
+
 import org.eclipse.jetty.server.Server;
 
 import net.endercraftbuild.bungee.commands.ReloadCommand;
@@ -85,7 +87,7 @@ public class Vote4Diamondz extends Plugin {
 			resourceOutputStream.close();
 			resourceInputStream.close();
 		} catch (IOException e) {
-			ProxyServer.getInstance().getLogger().warning("Failed to copy default resource: " + e.getLocalizedMessage());
+			ProxyServer.getInstance().getLogger().log(Level.SEVERE, "Failed to copy default resource: ", e);
 		}
 	}
 	
@@ -101,7 +103,7 @@ public class Vote4Diamondz extends Plugin {
 		try {
 			properties.load(new FileInputStream(getResource(CONFIG_FILE)));
 		} catch (IOException e) {
-			ProxyServer.getInstance().getLogger().warning("Failed to load configuration: " + e.getLocalizedMessage());
+			ProxyServer.getInstance().getLogger().log(Level.SEVERE, "Failed to load configuration: ", e);
 			properties = null;
 		}
 		
@@ -128,8 +130,7 @@ public class Vote4Diamondz extends Plugin {
 	        database.registerTable(VoteHistory.class);
 	        database.connect();
 		} catch (TableRegistrationException | ConnectionException e) {
-			ProxyServer.getInstance().getLogger().warning("Failed to setup database: " + e.getLocalizedMessage());
-			e.printStackTrace();
+			ProxyServer.getInstance().getLogger().log(Level.SEVERE, "Failed to setup database: ", e);
 			properties = null;
 		}
 		
@@ -143,8 +144,7 @@ public class Vote4Diamondz extends Plugin {
 			webServer.setHandler(new VoteHandler(this));
 			webServer.start();
 		} catch (Exception e) {
-            ProxyServer.getInstance().getLogger().severe("Could not start vote server: " + e.getLocalizedMessage());
-            e.printStackTrace();
+            ProxyServer.getInstance().getLogger().log(Level.SEVERE, "Could not start vote server: ", e);
             webServer = null;
 		}
 	}
@@ -154,7 +154,7 @@ public class Vote4Diamondz extends Plugin {
             try {
                 webServer.stop();
             } catch (Exception e) {
-                ProxyServer.getInstance().getLogger().severe("Could not stop vote server: " + e.getLocalizedMessage());
+                ProxyServer.getInstance().getLogger().log(Level.SEVERE, "Could not stop vote server: ", e);
                 webServer = null;
             }
         }
@@ -232,7 +232,7 @@ public class Vote4Diamondz extends Plugin {
 	        sr.close();
 	        voterHtml = out.toString().getBytes();
     	} catch (IOException e) {
-			ProxyServer.getInstance().getLogger().warning("Failed to load vote.html: " + e.getLocalizedMessage());
+			ProxyServer.getInstance().getLogger().log(Level.SEVERE, "Failed to load vote.html: ", e);
 			voterHtml = null;
     	}
     	
@@ -259,7 +259,7 @@ public class Vote4Diamondz extends Plugin {
 	        }
 	        sr.close();
     	} catch (IOException e) {
-			ProxyServer.getInstance().getLogger().warning("Failed to load sites.txt: " + e.getLocalizedMessage());
+			ProxyServer.getInstance().getLogger().log(Level.SEVERE, "Failed to load sites.txt: ", e);
 			sites = null;
     	}
     	
