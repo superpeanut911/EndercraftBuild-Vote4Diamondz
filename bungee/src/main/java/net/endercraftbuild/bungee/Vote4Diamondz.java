@@ -112,14 +112,16 @@ public class Vote4Diamondz extends Plugin {
 	
 	public void reload() {
 		stopWebServer();
+		closeDatabase();
 		
 		properties = null;
 		voterHtml = null;
 		sites = null;
 		
+		// database is re-initialized transparently
 		startWebServer();
 	}
-	
+
 	public Database getDatabase() {
 		if (database != null)
 			return database;
@@ -136,7 +138,19 @@ public class Vote4Diamondz extends Plugin {
 		
 		return database;
 	}
+
+	private void closeDatabase() {
+		if (database != null) {
+			try {
+				database.close();
+			} catch (ConnectionException e) {
+				ProxyServer.getInstance().getLogger().log(Level.SEVERE, "Failed to stop database: ", e);
+			}
+			database = null;
+		}
+	}
 	
+
 	public void startWebServer() {
 		try {
 			final InetSocketAddress bind = new InetSocketAddress(getHost(), getPort());
@@ -155,8 +169,8 @@ public class Vote4Diamondz extends Plugin {
                 webServer.stop();
             } catch (Exception e) {
                 ProxyServer.getInstance().getLogger().log(Level.SEVERE, "Could not stop vote server: ", e);
-                webServer = null;
             }
+            webServer = null;
         }
 	}
 	
