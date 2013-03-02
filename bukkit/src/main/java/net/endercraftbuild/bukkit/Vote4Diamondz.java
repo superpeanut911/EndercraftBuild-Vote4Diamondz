@@ -2,6 +2,7 @@ package net.endercraftbuild.bukkit;
 
 import java.io.File;
 
+import net.endercraftbuild.bukkit.commands.ReloadCommandExecutor;
 import net.endercraftbuild.bukkit.listeners.VoteMessageListener;
 import net.endercraftbuild.bukkit.tasks.VoterNagTask;
 
@@ -19,6 +20,8 @@ public class Vote4Diamondz extends JavaPlugin {
 	public void onEnable() {
 		if (!new File(this.getDataFolder().getPath() + File.separatorChar + "config.yml").exists())
 			saveDefaultConfig();
+		
+		getCommand("vreload").setExecutor(new ReloadCommandExecutor(this));
 		
 		startTasks();
 		registerEvents();
