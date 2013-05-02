@@ -38,7 +38,7 @@
     <dependencies>
         <dependency>
             <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-proxy</artifactId>
+            <artifactId>bungeecord-parent</artifactId>
             <version>1.5-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
