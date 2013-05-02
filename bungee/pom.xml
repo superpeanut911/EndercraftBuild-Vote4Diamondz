@@ -15,7 +15,11 @@
     <name>ECB Vote4Diamondz Bungee</name>
     <description>ECB BungeeCord Vote4Diamondz Plugin</description>
     
-    <repositories>
+    <repositories> 
+    <repository>
+-           <id>snapshot-repo</id>
+-           <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+-        </repository>
        <repository>
            <id>repo2_maven_org</id>
            <url>http://repo2.maven.org/maven2</url>
