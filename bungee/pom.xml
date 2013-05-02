@@ -17,8 +17,8 @@
     
     <repositories>
         <repository>
-            <id>bungee-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+           <id>snapshot-repo</id>
+     	    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
        <repository>
            <id>repo2_maven_org</id>
@@ -37,9 +37,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-parent</artifactId>
-            <version>1.5-SNAPSHOT</version>
+           <groupId>net.md-5</groupId>
+   	   <artifactId>bungeecord-parent</artifactId>
+         	<version>1.5-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
