@@ -16,9 +16,9 @@
     <description>ECB BungeeCord Vote4Diamondz Plugin</description>
     
     <repositories> 
-    <repository>
--           <id>snapshot-repo</id>
--           <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+    	<repository>
+    		<id>bungee-snapshots</id>
+    		<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 -        </repository>
        <repository>
            <id>repo2_maven_org</id>
@@ -38,7 +38,7 @@
     <dependencies>
         <dependency>
            <groupId>net.md-5</groupId>
-   	   <artifactId>bungeecord-parent</artifactId>
+   	   <artifactId>bungeecord-api</artifactId>
          	<version>1.5-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
