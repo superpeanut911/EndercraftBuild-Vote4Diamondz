@@ -48,13 +48,15 @@ public class Vote4Diamondz extends Plugin {
     private byte[] voterHtml;
     private Map<String, String> sites;
     	
+    	private Vote4Diamondz plugin;
+    	
 	@Override
 	public void onEnable() {
 		copyResource(CONFIG_FILE);
 		copyResource(VOTER_HTML_FILE);
 		copyResource(SITES_FILE);
 		
-		ProxyServer.getInstance().getPluginManager().registerCommand(reloadCommand = new ReloadCommand(this));
+		ProxyServer.getInstance().getPluginManager().registerCommand(plugin, reloadCommand = new ReloadCommand(this));
 		ProxyServer.getInstance().registerChannel(CHANNEL);
 		startWebServer();
 	}
